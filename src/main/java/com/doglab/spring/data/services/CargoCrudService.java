@@ -19,6 +19,7 @@ public class CargoCrudService extends GenericService
 		this.repo = repo;
 	}
 	
+	@Override
 	protected void save(Scanner scanner)
 	{
 		System.out.print("Descrição do CARGO: ");
@@ -32,6 +33,7 @@ public class CargoCrudService extends GenericService
 		System.out.println();
 	}
 	
+	@Override
 	protected void update(Scanner scanner)
 	{
 		System.out.print("Id do cargo: ");
@@ -51,27 +53,29 @@ public class CargoCrudService extends GenericService
 		}
 	}
 	
-	protected void listAll()
+	@Override
+	protected void listAll(Scanner scanner)
 	{
 		Iterable<Cargo> cargos = repo.findAll();
 		cargos.forEach(cargo -> System.out.println(cargo));
 	}
 	
+	@Override
 	protected void delete(Scanner scanner)
 	{
-		System.out.print("Id do cargo: ");
-		Long id = scanner.nextLong();
+		System.out.print("Descrição do cargo: ");
+		String desc = scanner.next();
 		
-		if(repo.existsById(id))
+		if(repo.existsByDescription(desc))
 		{
-			Optional<Cargo> optCargo = repo.findById(id);
+			Optional<Cargo> optCargo = repo.findWithDescription(desc);
 			Cargo cargo = optCargo.get();
-			repo.deleteById(id);
+			repo.deleteById(cargo.getId());
 			System.out.printf("CARGO %s DELETADO!", cargo.getDescription());
 		}
 		else
 		{
-			System.out.println("ID INVÁLIDO!");
+			System.out.println("DESCRIÇÃO INVÁLIDA!");
 		}
 
 	}

@@ -35,7 +35,7 @@ public class GenericService {
 					update(scanner);
 					break;
 				case 3:
-					listAll();
+					listAll(scanner);
 					break;
 				case 4:
 					delete(scanner);
@@ -51,7 +51,7 @@ public class GenericService {
 	
 	protected void update(Scanner scanner) {}
 	
-	protected void listAll() {}
+	protected void listAll(Scanner scanner) {}
 	
 	protected void delete(Scanner scanner) {}
 	

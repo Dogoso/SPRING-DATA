@@ -61,7 +61,7 @@ public class UnidadeDeTrabalhoCrudService extends GenericService{
 	}
 	
 	@Override
-	protected void listAll() {
+	protected void listAll(Scanner scanner) {
 		Iterable<UnidadeDeTrabalho> unidades = repo.findAll();
 		unidades.forEach(unidade -> System.out.println(unidade));
 	}

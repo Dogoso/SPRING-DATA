@@ -15,7 +15,9 @@ public class Cargo {
 	private Long id;
 	private String description;
 	
-	public Cargo() {}
+	public Cargo() {
+		
+	}
 	
 	public Cargo(String description) {
 		this.description = description;

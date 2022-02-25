@@ -32,7 +32,6 @@ public class Funcionario {
 	@ManyToMany(mappedBy = "funcionarios", fetch = FetchType.LAZY)
 	private List<UnidadeDeTrabalho> unities = new ArrayList<UnidadeDeTrabalho>();
 	
-	
 	public Funcionario() 
 	{
 		

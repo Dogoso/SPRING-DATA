@@ -17,6 +17,7 @@ public class SpringDataApplication implements CommandLineRunner {
 	private final CargoCrudService cargoService;
 	private final FuncionarioCrudService funcionarioService;
 	private final UnidadeDeTrabalhoCrudService unidadesService;
+	
 	private boolean run = true;
 	
 	public SpringDataApplication(CargoCrudService cargoService,

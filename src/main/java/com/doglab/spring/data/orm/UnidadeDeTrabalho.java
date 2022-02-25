@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -22,6 +23,7 @@ public class UnidadeDeTrabalho {
 	private String adress;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "funcionarios_id")
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
 	public UnidadeDeTrabalho()

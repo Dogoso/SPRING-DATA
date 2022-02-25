@@ -6,6 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Scanner;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.doglab.spring.data.orm.Cargo;
@@ -55,20 +59,25 @@ public class FuncionarioCrudService extends GenericService
 		System.out.println("");
 	}
 	
-	protected void listAll()
+	protected void listAll(Scanner scanner)
 	{
-		Iterable<Funcionario> funcionarios = repo.findAll();
+		System.out.println("--- PAG 1 ... 2");
+		Integer page = scanner.nextInt() - 1;
+		
+		Pageable pageable = PageRequest.of(page, 3, Sort.by(Sort.Direction.ASC ,"name"));
+		
+		Page<Funcionario> funcionarios = repo.findAll(pageable);
 		funcionarios.forEach(funcionario -> System.out.println(funcionario));
 	}
 	
 	protected void update(Scanner scanner)
 	{
-		System.out.println("Id do Funcionario: ");
-		Long id = scanner.nextLong();
+		System.out.println("Nome do Funcionario: ");
+		String nameTyped = scanner.next();
 		
-		if(repo.existsById(id))
+		if(repo.existsByName(nameTyped))
 		{
-			Optional<Funcionario> optFuncionario = repo.findById(id);
+			Optional<Funcionario> optFuncionario = repo.findByNameEager(nameTyped);
 			Funcionario funcionario = optFuncionario.get();
 			
 			System.out.println("Name: ");
@@ -136,7 +145,10 @@ public class FuncionarioCrudService extends GenericService
 			System.out.println("Quer adicionar mais uma unidade?[0=N, 1=Y] ");
 			Integer answer = scanner.nextInt();
 			if(answer == 0)
+			{
 				more = false;
+			}
+				
 		}
 	}
 	
